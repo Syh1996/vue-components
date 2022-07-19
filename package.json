@@ -1,15 +1,19 @@
 {
-  "name": "vue-components",
-  "version": "0.1.0",
-  "private": true,
+  "name": "s-vue-components",
+  "version": "0.1.4",
+  "private": false,
+  "main": "./dist",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "publish": "vue-cli-service build --target lib ./src/app.js --dest dist --name app"
   },
   "dependencies": {
+    "element-plus": "^2.2.9",
     "vue": "^3.2.13"
   },
   "devDependencies": {
-    "@vue/cli-service": "~5.0.0"
+    "@vue/cli-service": "~5.0.0",
+    "less-loader": "^11.0.0"
   }
 }
