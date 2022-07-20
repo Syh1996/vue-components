@@ -130,7 +130,6 @@ export default {
   height: 600px;
   background-color: #a4a4a4;
   width:600px;
-  margin: 0 auto;
   overflow: hidden;
 }
 .loading-list {
