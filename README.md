@@ -29,14 +29,14 @@ createApp(App).use(router).use(sVueComponents).mount('#app')
 新增11种全新加载时的动画，效果预览请点击：[http://vuedocs.yuhongshao.cn/](http://vuedocs.yuhongshao.cn/)
 
 ``````html
- <Loading
+ <s-Loading
         :type="item"
         :show="true"
         :hasBackground="true"
         customClass="custom-class"
       >
        <你的组件></你的组件>
- </Loading>
+ </s-Loading>
 ``````
 
 配置参数说明
@@ -49,6 +49,8 @@ createApp(App).use(router).use(sVueComponents).mount('#app')
 | customClass     | string类型<br>自定义class名                                  |                          |
 | backgroundColor | string类型<br>当hasBackground=true时，可配置背景遮罩颜色     | 默认rgba(255,255,255,.8) |
 | barBackground   | string类型<br>当type=linerGradentScale时，可配置动画块背景颜色，type=其它时无效 |                          |
+| loadingText     | string类型<br>加载动画显示的文字                             | 默认 加载中...           |
+| showText        | boolean类型<br>是否显示加载中...文字                         | 默认  false              |
 
 ### 其它
 

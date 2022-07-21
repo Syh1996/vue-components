@@ -6,7 +6,7 @@ p {
 
 .detail {
     height: 100%;
-    background-color: rgba(255,255,255,.8);
+    background-color: rgba(255, 255, 255, .8);
     position: absolute;
     left: 0;
     right: 0;
@@ -18,7 +18,17 @@ p {
     justify-content: center;
     flex-direction: column;
 
+    .loading-text {
+        margin-top: 6px;
+        color: #ddd;
+        text-align: center;
+    }
+
     .linerGradentScale {
+        &+.loading-text {
+            margin-top: 30px;
+        }
+
         &>div {
             width: 9px;
             height: 5px;
@@ -72,6 +82,10 @@ p {
                 border-radius: 50%;
                 animation: circleRotateAfterRotate 1.5s infinite linear;
             }
+        }
+
+        &+.loading-text {
+            margin-top: 30px;
         }
     }
 
@@ -131,6 +145,10 @@ p {
     .positionChange {
         position: relative;
 
+        &+.loading-text {
+            margin-top: 28px;
+        }
+
         &:before {
             width: 20px;
             height: 20px;
@@ -139,6 +157,7 @@ p {
             content: '';
             position: absolute;
             background: #9b59b6;
+            left: -20px;
             -webkit-animation: preloader_3_before 1.5s infinite ease-in-out;
             animation: preloader_3_before 1.5s infinite ease-in-out;
         }
@@ -151,7 +170,7 @@ p {
             content: '';
             position: absolute;
             background: #2ecc71;
-            left: 22px;
+            left: 0px;
             -webkit-animation: preloader_3_after 1.5s infinite ease-in-out;
             animation: preloader_3_after 1.5s infinite ease-in-out;
         }
@@ -551,24 +570,29 @@ p {
         transform: translate(-16px, -16px);
     }
 }
-.othorAni{
+
+.othorAni {
     width: 50px;
     height: 50px;
     position: relative;
 }
 
- .othorAni .shape-1 {
+.othorAni .shape-1 {
     background-color: #1875E5;
-  }
- .othorAni .shape-2 {
+}
+
+.othorAni .shape-2 {
     background-color: #C5523F;
-  }
- .othorAni .shape-3 {
+}
+
+.othorAni .shape-3 {
     background-color: #499255;
-  }
- .othorAni .shape-4 {
+}
+
+.othorAni .shape-4 {
     background-color: #F2B736;
-  }
+}
+
 .animation-1 {
     transform: rotate(45deg);
     transform: rotate(45deg);
@@ -1620,6 +1644,13 @@ p {
     }
 }
 
+.animation-7 {
+    width: 80px;
+}
+
+.animation-7+.loading-text {
+    margin-top: 0px;
+}
 
 .animation-7 .shape {
     width: 20px;
@@ -1630,6 +1661,7 @@ p {
 }
 
 .animation-7 .shape-1 {
+    left: 0px;
     -webkit-animation: Animation7Shape1 1s ease infinite;
     animation: Animation7Shape1 1s ease infinite;
 }
@@ -1784,6 +1816,10 @@ p {
     }
 }
 
+.animation-8+.loading-text {
+    margin-top: -5px;
+}
+
 .animation-8 .shape {
     width: 15px;
     height: 15px;
@@ -1815,5 +1851,3 @@ p {
     -webkit-animation: Animation8Shape4 1.5s ease infinite 1s;
     animation: Animation8Shape4 1.5s ease infinite 1s;
 }
-
-

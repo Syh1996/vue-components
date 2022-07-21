@@ -2,7 +2,7 @@
   <!-- <Count /> -->
   <h2>Loading动画类<span class="toggle-btn" @click="toggleChange">+</span></h2>
   <div class="toggle-box">
-    <pre>
+<!--     <pre>
     /**
       *  参数说明：
       *  type            动画类型，参考以下动画类型
@@ -23,7 +23,7 @@
    
     &lt;/Loading&gt;
   </pre
-    >
+    > -->
     <section
       class="loading-list"
       v-for="(item, index) in loadings"
@@ -35,6 +35,8 @@
         :show="true"
         :hasBackground="true"
         customClass="custom-class"
+        showText
+        loadingText="请求中"
       >
         <el-table :data="tableData" style="width: 100%">
           <el-table-column prop="date" label="Date" width="180" />
@@ -130,6 +132,7 @@ export default {
   height: 600px;
   background-color: #a4a4a4;
   width:600px;
+
   overflow: hidden;
 }
 .loading-list {
@@ -161,8 +164,8 @@ pre {
   box-sizing: border-box;
 }
 .toggle-box {
-  /*  width: 1000px;
-  margin: 0 auto; */
+   width: 1000px;
+  margin: 0 auto;
   transition: all 0.5s;
   overflow: hidden;
 }

@@ -46,6 +46,7 @@
       <div class="shape shape-3"></div>
       <div class="shape shape-4"></div>
     </div>
+    <p class="loading-text" v-if="showText">{{loadingText}}</p>
   </div>
 </template>
 
@@ -81,6 +82,16 @@ export default {
       type: String,
       default: "",
     },
+    //loading文字
+    loadingText:{
+      type:String,
+      default:"加载中..."
+    },
+    //是否展示loadingText
+    showText:{
+      type:Boolean,
+      default:false
+    }
   },
 };
 </script>
