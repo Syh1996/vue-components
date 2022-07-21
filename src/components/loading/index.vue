@@ -26,7 +26,7 @@ export default {
         onMounted(()=>{
             const chlidNodes = loadingBox.value.children[0];
             const loading =  loadingBox.value.children[1];
-            loading.style.width = getStyle(chlidNodes,'width')
+           /*  loading.style.width = getStyle(chlidNodes,'width') */
         });
         return {
             loadingBox
