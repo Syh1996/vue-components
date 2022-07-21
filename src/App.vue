@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import { reactive, ref } from "@vue/reactivity";
+import { reactive, ref } from "vue";
 import Count from "./components/count";
 import Loading from "./components/loading";
 export default {

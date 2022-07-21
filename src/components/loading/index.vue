@@ -24,7 +24,6 @@ export default {
             }
         }
         onMounted(()=>{
-            console.log('当前',loadingBox.value);
             const chlidNodes = loadingBox.value.children[0];
             const loading =  loadingBox.value.children[1];
             loading.style.width = getStyle(chlidNodes,'width')
