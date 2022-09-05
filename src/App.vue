@@ -1,5 +1,16 @@
 <template>
   <!-- <Count /> -->
+  <h2>标题类<span class="toggle-btn" @click="toggleChange">+</span></h2>
+  <div class="toggle-box">
+     <tableTitle themeColor="blue" title="结果"></tableTitle>
+     <tableTitle themeColor="orange" title="查询条件"></tableTitle>
+      <tableTitle  title="标题"></tableTitle>
+  </div>
+   <h2>表单类<span class="toggle-btn" @click="toggleChange">+</span></h2>
+  <div class="toggle-box">
+     <formItemGroup ></formItemGroup>
+  </div>
+  
   <h2>Loading动画类<span class="toggle-btn" @click="toggleChange">+</span></h2>
   <div class="toggle-box">
 <!--     <pre>
@@ -44,16 +55,9 @@
           <el-table-column prop="address" label="Address" />
         </el-table>
       </Loading>
-    
+
+     
     </section>
-      <Loading
-        type="linerGradentScale"
-        :show="true"
-        :hasBackground="true"
-        customClass="custom-class"
-      >
-        <div class="empty-div"></div>
-      </Loading>
   </div>
 </template>
 
@@ -61,11 +65,15 @@
 import { reactive, ref } from "vue";
 import Count from "./components/count";
 import Loading from "./components/loading";
+import tableTitle from './components/table/table-title.vue';
+import formItemGroup from './components/table/formItemGroup.vue';
 export default {
   name: "App",
   components: {
     Count,
     Loading,
+    tableTitle,
+    formItemGroup
   },
   setup() {
     const tableDataDefault = [
@@ -127,6 +135,9 @@ export default {
   },
 };
 </script>
+<style>
+   @import '@/assets/less/global.less';
+</style>
 <style scoped lang="less">
 .empty-div {
   height: 600px;
@@ -142,14 +153,14 @@ export default {
   padding: 20px;
 }
 h2 {
-  width: 1000px;
-  margin: 0 auto;
+  width: 1200px;
+  margin: 0 auto 20px;
   position: relative;
   .toggle-btn {
     font-size: 30px;
     position: absolute;
     right: 10px;
-    top: 10px;
+    top: 0px;
     user-select: none;
     cursor: pointer;
     color: cadetblue;
@@ -164,7 +175,7 @@ pre {
   box-sizing: border-box;
 }
 .toggle-box {
-   width: 1000px;
+   width: 1200px;
   margin: 0 auto;
   transition: all 0.5s;
   overflow: hidden;

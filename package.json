@@ -17,8 +17,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/Syh1996/vue-components.git"
-  },  
+  },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.0.9",
     "element-plus": "^2.2.9",
     "vue": "^3.2.13"
   },
