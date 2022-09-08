@@ -2,18 +2,39 @@
   <!-- <Count /> -->
   <h2>标题类<span class="toggle-btn" @click="toggleChange">+</span></h2>
   <div class="toggle-box">
-     <tableTitle themeColor="blue" title="结果"></tableTitle>
-     <tableTitle themeColor="orange" title="查询条件"></tableTitle>
-      <tableTitle  title="标题"></tableTitle>
+    <tableTitle themeColor="blue" title="结果"></tableTitle>
+    <tableTitle themeColor="orange" title="查询条件"></tableTitle>
+    <tableTitle title="标题"></tableTitle>
   </div>
-   <h2>表单类<span class="toggle-btn" @click="toggleChange">+</span></h2>
+  <h2>表单类<span class="toggle-btn" @click="toggleChange">+</span></h2>
   <div class="toggle-box">
-     <formItemGroup ></formItemGroup>
+    <formItemGroup :formConfig="formConfig" ref="formItemGroup">
+      <div class="handle-btn">
+        <el-button icon="RefreshLeft" @click="reset">重置</el-button>
+        <el-button type="primary" icon="Search" @click="search">查询</el-button>
+        
+      </div>
+    </formItemGroup>
   </div>
-  
+
+
+  <h2>表格类<span class="toggle-btn" @click="toggleChange">+</span></h2>
+  <div class="toggle-box">
+    <tableComponents :tableConfig="tableConfig" :tableData="tableData2" :tableColumnConfig="tableColumnConfig" @getSelectRow="getSelectRow">
+         <template #date="data">
+           <p @click="showData(data)">自定义日期</p>
+        </template>
+        <template #handle="data">
+            <el-button type="danger" @click="deleteItem(data)">删除</el-button>
+        </template>
+    </tableComponents>
+  </div>
+
+
+
   <h2>Loading动画类<span class="toggle-btn" @click="toggleChange">+</span></h2>
   <div class="toggle-box">
-<!--     <pre>
+    <!--     <pre>
     /**
       *  参数说明：
       *  type            动画类型，参考以下动画类型
@@ -55,8 +76,6 @@
           <el-table-column prop="address" label="Address" />
         </el-table>
       </Loading>
-
-     
     </section>
   </div>
 </template>
@@ -65,15 +84,18 @@
 import { reactive, ref } from "vue";
 import Count from "./components/count";
 import Loading from "./components/loading";
-import tableTitle from './components/table/table-title.vue';
-import formItemGroup from './components/table/formItemGroup.vue';
+import tableTitle from "./components/table/table-title.vue";
+import formItemGroup from "./components/table/formItemGroup.vue";
+import { defaultFormList } from "./testData.js";
+import tableComponents from './components/table/table.vue';
 export default {
   name: "App",
   components: {
     Count,
     Loading,
     tableTitle,
-    formItemGroup
+    formItemGroup,
+    tableComponents
   },
   setup() {
     const tableDataDefault = [
@@ -114,6 +136,8 @@ export default {
       "animation-7",
       "animation-8",
     ]);
+    const formConfig = reactive(defaultFormList);
+    const formItemGroup = ref("");
     const getStyle = (element, attr) => {
       if (element.currentStyle) {
         return element.currentStyle[attr];
@@ -127,22 +151,88 @@ export default {
       const nextEleHeight = getStyle(nextEle, "height");
       nextEle.style.height = nextEleHeight === "0px" ? "auto" : "0px";
     };
+
+    const search = () => {
+      const curRef = formItemGroup.value;
+      const searchData = curRef.search();
+      console.log(searchData);
+    };
+    const reset = ()=>{
+        const curRef = formItemGroup.value;
+        curRef.reset();
+    }
+    const getSelectRow = row=>{
+      console.log('当前rows:',row);
+    }
+    const tableConfig = {
+      border:true,
+      stripe:true,
+      maxHeight:400,
+      selection:true,
+      tableLayout:'fixed',
+      rowClassName:(row)=>{
+        return 'shao'
+      },
+      indexMethod:index=>{
+        return '->'+index* 2;
+      },
+      cellClassName:(row)=>{
+        //console.log(row);
+      },
+      showIndex:true
+    }
+    const tableColumnConfig = {
+      date :{title: '日期',key:'date'},
+      name:{title:'姓名',key:'name',sortable:true},
+      address:{title:'地址',key:'address',width:300},
+      handle:{title:'操作',key:'handle',fixed:'right',width:120}
+    }
+     const tableData2 = reactive([
+      {
+        date: "2016-05-03",
+        name: "Tom",
+        address: "No. 189, Grove St, Los Angeles",
+      },
+      {
+        date: "2016-05-02",
+        name: "Tom",
+        address: "No. 189, Grove St, Los Angeles",
+      },
+      {
+        date: "2016-05-04",
+        name: "Tom",
+        address: "No. 189, Grove St, Los Angeles",
+      },
+      {
+        date: "2016-05-01",
+        name: "Tom",
+        address: "No. 189, Grove St, Los Angeles",
+      },
+    ]);
     return {
       tableData,
       loadings,
       toggleChange,
+      formConfig,
+      formItemGroup,
+      search,
+      reset,
+      tableData2,
+      tableColumnConfig,
+      tableConfig,
+      getSelectRow
     };
   },
 };
 </script>
 <style>
-   @import '@/assets/less/global.less';
+@import "@/assets/less/global.less";
 </style>
 <style scoped lang="less">
 .empty-div {
   height: 600px;
   background-color: #a4a4a4;
-  width:600px;
+  width: 600px;
 
   overflow: hidden;
 }
@@ -175,7 +265,7 @@ pre {
   box-sizing: border-box;
 }
 .toggle-box {
-   width: 1200px;
+  width: 1200px;
   margin: 0 auto;
   transition: all 0.5s;
   overflow: hidden;

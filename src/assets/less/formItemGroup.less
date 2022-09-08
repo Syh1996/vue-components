@@ -1,20 +1,44 @@
-.form-item-group{
-    .input-group{
+.form-item-group {
+    .input-group {
         display: flex;
         margin-bottom: 15px;
-        &>label{
-            flex:0 0 100px;
-            text-align: right;
+
+        &>label {
+            flex: 0 0 100px;
+
             line-height: 30px;
         }
-        &>.input-bar{
-            flex:1;
+
+        &.text-left {
+            &>label {
+                text-align: left;
+            }
+        }
+
+        &.text-right {
+            &>label {
+                text-align: right;
+            }
+        }
+        &.text-center{
+            &>label{
+                text-align: center;
+            }
+        }
+
+        &>.input-bar {
+            flex: 1;
         }
     }
-    .handle-btn{
-        text-align:right;
+
+    /deep/ .handle-btn {
+        text-align: right;
     }
-    .el-input,.el-select{
-        width:100%;
+
+   /deep/ .el-input,
+   /deep/ .el-select,
+   /deep/ .el-date-editor {
+        width: 100%;
+        box-sizing: border-box;
     }
 }
