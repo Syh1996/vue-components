@@ -1,13 +1,15 @@
 {
   "name": "s-vue-components",
-  "version": "1.0.9",
+  "version": "2.0.0",
   "private": false,
   "main": "./dist/app.umd.min.js",
   "keywords": [
     "loading",
     "vue-loading",
     "vue加载动画",
-    "加载动画"
+    "vue搜索表单封装",
+    "vue表格封装",
+    "vue分页封装"
   ],
   "scripts": {
     "serve": "vue-cli-service serve",

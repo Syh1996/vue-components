@@ -1,8 +1,8 @@
 <template>
   <section class="table-components">
-    {{$slots}}-
-    {{$attrs}}-
- 
+    <div class="batch-handle" v-if="$slots['batchHandle']">
+       <slot name="batchHandle" :data="selectTr.value"></slot>
+    </div>
     <el-table
       :data="tableData"
       :border="tableGlobalConfig.border === true"
@@ -35,22 +35,23 @@
         :sortable="item.sortable || false"
       >
         <template #default="scope">
-          <div v-if="item.key !=='handle'">
-            {{ scope.row[item.key] }}
+          <div v-if="item.key !== 'handle'">
+            <div v-if="$slots[item.key]">
+              <slot :name="item.key" :data="scope.row"></slot>
+            </div>
+            <p v-else>{{ scope.row[item.key] }}</p>
           </div>
           <div v-else>
-             <slot name="handle" :row="scope.row"></slot>
+            <slot name="handle" :row="scope.row"></slot>
           </div>
         </template>
       </el-table-column>
-
-     
     </el-table>
   </section>
 </template>
 
 <script>
-import { reactive, watchEffect } from "vue";
+import { reactive } from "vue";
 export default {
   name: "tableComponents",
   props: {
@@ -69,6 +70,8 @@ export default {
   },
   setup(props, context) {
     let tableGlobalConfig = reactive(props.tableConfig);
+    //选择的表行
+    let selectTr = reactive({value:[]});
     //初始表单配置默认值
     const initTableGlobalConfig = () => {
       tableGlobalConfig = {
@@ -91,23 +94,26 @@ export default {
       };
     };
     initTableGlobalConfig();
-
-    //选择的表行
-    let selectTr = reactive([]);
     //表格选择
     const handleSelectionChange = (val) => {
-      selectTr = val;
+      selectTr.value  = val;
       context.emit("getSelectRow", val);
     };
-   
+
     return {
       tableGlobalConfig,
+      selectTr,
       handleSelectionChange,
-  
     };
   },
 };
 </script>
 
 <style scoped lang="less">
+.table-components{
+  .batch-handle{
+    margin-bottom: 15px;
+    text-align: right;
+  }
+}
 </style>

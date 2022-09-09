@@ -21,15 +21,23 @@
   <h2>表格类<span class="toggle-btn" @click="toggleChange">+</span></h2>
   <div class="toggle-box">
     <tableComponents :tableConfig="tableConfig" :tableData="tableData2" :tableColumnConfig="tableColumnConfig" @getSelectRow="getSelectRow">
-         <template #date="data">
-           <p @click="showData(data)">自定义日期</p>
+         <template #batchHandle="{data}">
+            <el-button type="danger" @click="deleteItem(data)">批量删除</el-button>
+        </template>
+         <template #date="{data}">
+           <p @click="showData(data)">{{data.date.replaceAll('-','/')}}</p>
         </template>
         <template #handle="data">
             <el-button type="danger" @click="deleteItem(data)">删除</el-button>
         </template>
+
     </tableComponents>
   </div>
 
+ <h2>分页类<span class="toggle-btn" @click="toggleChange">+</span></h2>
+  <div class="toggle-box">
+      <Pagination :config="{total:1000}" @getPaginationData="getPaginationData"></Pagination>
+  </div>
 
 
   <h2>Loading动画类<span class="toggle-btn" @click="toggleChange">+</span></h2>
@@ -88,6 +96,7 @@ import tableTitle from "./components/table/table-title.vue";
 import formItemGroup from "./components/table/formItemGroup.vue";
 import { defaultFormList } from "./testData.js";
 import tableComponents from './components/table/table.vue';
+import Pagination from './components/pagination';
 export default {
   name: "App",
   components: {
@@ -95,7 +104,8 @@ export default {
     Loading,
     tableTitle,
     formItemGroup,
-    tableComponents
+    tableComponents,
+    Pagination
   },
   setup() {
     const tableDataDefault = [
@@ -151,6 +161,9 @@ export default {
       const nextEleHeight = getStyle(nextEle, "height");
       nextEle.style.height = nextEleHeight === "0px" ? "auto" : "0px";
     };
+    const deleteItem = data=>{
+      console.log(data);
+    }
 
     const search = () => {
       const curRef = formItemGroup.value;
@@ -187,6 +200,9 @@ export default {
       address:{title:'地址',key:'address',width:300},
       handle:{title:'操作',key:'handle',fixed:'right',width:120}
     }
+    const getPaginationData = opt=>{
+      console.log(opt);
+    }
      const tableData2 = reactive([
       {
         date: "2016-05-03",
@@ -220,7 +236,9 @@ export default {
       tableData2,
       tableColumnConfig,
       tableConfig,
-      getSelectRow
+      getSelectRow,
+      getPaginationData,
+      deleteItem
     };
   },
 };
