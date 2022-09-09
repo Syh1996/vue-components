@@ -36,7 +36,7 @@
 
  <h2>分页类<span class="toggle-btn" @click="toggleChange">+</span></h2>
   <div class="toggle-box">
-      <Pagination :config="{total:1000}" @getPaginationData="getPaginationData"></Pagination>
+      <Pagination  @getPaginationData="getPaginationData"></Pagination>
   </div>
 
 

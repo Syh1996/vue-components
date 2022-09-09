@@ -73,6 +73,11 @@ export default {
       float: right;
     }
   }
+  &.center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   /deep/ .el-pagination__sizes{
       margin-left: 20px;
   }
